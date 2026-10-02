@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Meals" />
+    <meta name="theme-color" content="#d01288" />
+    <title>Meal tracker</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon-180.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <p class="eyebrow">Weight loss journal</p>
+        <h1>Meal tracker</h1>
+      </div>
+      <nav class="nav" aria-label="Sections">
+        <button type="button" class="nav-btn is-active" data-view="bank">Meal bank</button>
+        <button type="button" class="nav-btn" data-view="calendar">Calendar</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="view-bank" class="view" aria-labelledby="bank-heading">
+        <div class="view-head">
+          <div>
+            <h2 id="bank-heading">Meals you can eat</h2>
+            <p class="lede">Save a meal once. Log it on any day you actually eat it.</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="add-meal">Add meal</button>
+        </div>
+        <div id="meal-list" class="meal-list"></div>
+      </section>
+
+      <section id="view-calendar" class="view" hidden aria-labelledby="calendar-heading">
+        <div class="view-head">
+          <div>
+            <h2 id="calendar-heading">Calendar</h2>
+            <p class="lede">Each day has breakfast, lunch, and dinner. Pick a meal from your bank.</p>
+          </div>
+          <div class="month-nav">
+            <button type="button" class="btn btn-ghost" id="prev-month" aria-label="Previous month">Prev</button>
+            <p id="month-label" class="month-label"></p>
+            <button type="button" class="btn btn-ghost" id="next-month" aria-label="Next month">Next</button>
+          </div>
+        </div>
+        <div id="calendar-layout" class="calendar-layout">
+          <div class="month-grid">
+            <div class="weekday-row" aria-hidden="true">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+          </div>
+          <section id="day-panel" class="day-panel" aria-live="polite"></section>
+        </div>
+      </section>
+    </main>
+
+    <div id="meal-dialog" class="sheet" hidden>
+      <div class="dialog" role="dialog" aria-labelledby="meal-form-title">
+        <form id="meal-form">
+          <h3 id="meal-form-title">Add meal</h3>
+          <label>
+            Name
+            <input id="meal-name" name="name" type="text" required maxlength="80" autocomplete="off" enterkeyhint="done" />
+          </label>
+          <label>
+            Description
+            <textarea id="meal-description" name="description" rows="5" maxlength="2000" placeholder="Calories, protein, how you make it…"></textarea>
+          </label>
+          <label class="file-label">
+            Photo <span class="optional">(optional)</span>
+            <input id="meal-image" name="image" type="file" accept="image/*" />
+          </label>
+          <div id="image-preview-wrap" class="image-preview-wrap" hidden>
+            <img id="image-preview" alt="" />
+            <button type="button" class="btn btn-ghost" id="remove-image">Remove photo</button>
+          </div>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-ghost" id="cancel-meal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-meal">Save meal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="picker-dialog" class="sheet" hidden>
+      <div class="dialog" role="dialog" aria-labelledby="picker-title">
+        <div class="dialog-head">
+          <h3 id="picker-title">Choose a meal</h3>
+          <button type="button" class="btn btn-ghost" id="close-picker">Close</button>
+        </div>
+        <div id="picker-list" class="picker-list"></div>
+      </div>
+    </div>
+
+    <div id="detail-dialog" class="sheet" hidden>
+      <div class="dialog" role="dialog">
+        <div id="detail-body"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
